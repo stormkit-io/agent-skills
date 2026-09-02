@@ -1,0 +1,13 @@
+{
+  "name": "stormkit",
+  "owner": {
+    "name": "Stormkit"
+  },
+  "plugins": [
+    {
+      "name": "corgy",
+      "source": "./plugins/corgy",
+      "description": "Plans a product demo from your codebase — scenes, a recording prompt for each, and the narration — then records them with the Corgy macOS app on your go-ahead."
+    }
+  ]
+}
