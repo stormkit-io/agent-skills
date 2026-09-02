@@ -25,8 +25,8 @@ nothing in it is specific to one runtime.
 Then:
 
 ```
-/corgy "an onboarding demo for our dashboard"
-/corgy "the export feature, 60 seconds, for the changelog"
+/corgy:demo "an onboarding demo for our dashboard"
+/corgy:demo "the export feature, 60 seconds, for the changelog"
 ```
 
 Inside the product's repo it reads the code — the router, the components, the

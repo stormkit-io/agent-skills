@@ -1,8 +1,8 @@
 ---
-name: corgy
+name: demo
 license: MIT
 compatibility: Plans demos for any product. Recording them needs the Corgy macOS app (corgy.ai) installed and signed in; without it the skill still produces the plan, the prompts and the narration.
-description: Plan and write the Corgy prompts for a product demo. Takes the brief as an argument — `/corgy "an onboarding demo for Acme"` — works out what the product is from the repo you are standing in, or from the web when the repo is not here, and comes back with a summary, a scene plan with a ready-to-paste recording prompt under each scene, and a narration prompt. Use when the user wants a demo, an onboarding video, a release clip, a changelog GIF, or says "record a demo", "show this off", "/corgy". Then adapt the plan to their feedback — drop a scene, merge it into one cut, change the order — and record the scenes with the Corgy Mac app, one at a time, on their go-ahead.
+description: Plan and write the Corgy prompts for a product demo. Takes the brief as an argument — `/corgy:demo "an onboarding demo for Acme"` — works out what the product is from the repo you are standing in, or from the web when the repo is not here, and comes back with a summary, a scene plan with a ready-to-paste recording prompt under each scene, and a narration prompt. Use when the user wants a demo, an onboarding video, a release clip, a changelog GIF, or says "record a demo", "show this off", "/corgy:demo". Then adapt the plan to their feedback — drop a scene, merge it into one cut, change the order — and record the scenes with the Corgy Mac app, one at a time, on their go-ahead.
 ---
 
 # Demo Planner
@@ -51,9 +51,9 @@ guesses. You are the only one here who can read the router.
 The argument is the brief:
 
 ```
-/corgy "an onboarding demo for this app"
-/corgy "show off the prompt history, 30 seconds, one cut"
-/corgy                                    # no argument: ask what the demo is for
+/corgy:demo "an onboarding demo for this app"
+/corgy:demo "show off the prompt history, 30 seconds, one cut"
+/corgy:demo                                    # no argument: ask what the demo is for
 ```
 
 It names the **subject**. Once you have one, never come back and ask the user to
