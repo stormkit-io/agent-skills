@@ -1,8 +1,8 @@
 ---
 name: demo
 license: MIT
-compatibility: Plans demos for any product. Recording them needs the Corgy macOS app (corgy.ai) installed and signed in; without it the skill still produces the plan, the prompts and the narration.
-description: Plan and write the Corgy prompts for a product demo. Takes the brief as an argument — `/corgy:demo "an onboarding demo for Acme"` — works out what the product is from the repo you are standing in, or from the web when the repo is not here, and comes back with a summary, a scene plan with a ready-to-paste recording prompt under each scene, and a narration prompt. Use when the user wants a demo, an onboarding video, a release clip, a changelog GIF, or says "record a demo", "show this off", "/corgy:demo". Then adapt the plan to their feedback — drop a scene, merge it into one cut, change the order — and record the scenes with the Corgy Mac app, one at a time, on their go-ahead.
+compatibility: Plans demos for any product. Recording one needs the Corgy macOS app (corgy.ai) 0.1.4 or newer, installed and signed in; without it the skill still produces the plan, the prompts and the narration, and the sheet it writes keeps until there is an app to open it with.
+description: Plan a product demo and hand it to the Corgy macOS app. Takes the brief as an argument — `/corgy:demo "an onboarding demo for Acme"` — works out what the product is from the repo you are standing in, or from the web when the repo is not here, and comes back with a summary, a scene plan with the recording prompt under each scene, and a narration prompt. Then writes it all as a demo sheet and opens Corgy on it, where the takes are listed and each one is aimed into the video the first take made, for the user to record scene by scene. Use when the user wants a demo, an onboarding video, a release clip, a changelog GIF, or says "record a demo", "show this off", "/corgy:demo". Adapts the plan to their feedback — drop a scene, merge it into one cut, change the order — and rewrites the sheet. Never records anything itself: pressing Record stays with the person whose screen it is.
 ---
 
 # Demo Planner
@@ -26,21 +26,30 @@ A single message containing:
    is aimed, and where the frames are held
 4. a **narration prompt** — why the product exists, which the narrator writes
    the script from
+5. a **demo sheet** — that plan as one JSON file, and the Corgy app opened on
+   it, with the takes listed and the first one's prompt already in the box
 
-and then an offer to record the scenes, one at a time, on their go-ahead.
+The sheet is the handover. Everything above is for the user to read and argue
+with; the file is what the app records from, so nobody pastes anything.
 
 Nothing here blocks. Hand over the whole thing, then change it when the user
 pushes back — that is step 6, and it is the normal case, not the exception.
 
-Then **offer to record it**, and record a scene only when they say go. Step 5
-has the rules; the short version is that you never start a take the user has not
-just agreed to.
+Then **hand it over** and stop. Step 5 has the mechanics; the short version is
+that you write the sheet, open the app on it, and the person at the machine
+presses Record.
 
-**Everything reaches Corgy through the Mac app or the editor.** The `corgy`
-command is the Mac app, so driving it is allowed and expected. Never `curl`,
-never a direct API call — not to drive a run, and not to read state. If you need
-to know what a setting is currently set to, either the user looks, or it becomes
-a precondition in the plan.
+**Everything reaches Corgy through the Mac app or the editor.** You write a
+sheet and open the app on it; the app does the rest. Never `curl`, never a
+direct API call — not to drive a run, and not to read state. If you need to know
+what a setting is currently set to, either the user looks, or it becomes a
+precondition in the plan.
+
+And never start a recording yourself. Not with `corgy "<prompt>"`, not with
+`--demo` from your own shell, not because the last take worked. A run drives
+somebody's screen and writes to whatever the flow touches, twice - and the app
+only asks before performing a plan when it has a terminal to ask on, which a run
+started from an agent session does not. The window is where somebody says yes.
 
 That constraint is what makes §2 non-negotiable. Corgy's planner is looking at a
 screen, not at the repo — every URL and label it does not get from you, it
@@ -292,16 +301,16 @@ Bad — invented path, a location, an explanation, and a prohibition:
 > Go to the environment settings page and scroll to the switch at the top right,
 > which reveals a second one underneath. Do not touch anything else.
 
-### The assembly sheet
+### How it goes together
 
-The scenes are separate recordings; this is what makes them one video. Ordered,
-naming where each take is aimed, then the freezes, then the narration, then
-export. A one-cut demo still gets a sheet, but a short one: the take, the
-narration, the export.
+The scenes are separate recordings; this is what makes them one video. Short,
+because the app carries most of it now: the takes are recorded in order and each
+one is aimed for you, so what is left to say is the freezes, then the narration,
+then export — in that order, and the order is not advice. Both of those steps
+destroy work when they are taken early: a take aimed inside a frozen frame lands
+at its edge, and writing the narration again replaces every line.
 
-Two of those steps destroy work if taken early — the narration is written over
-the whole timeline and replaces every line. `references/assembly.md` has the
-mechanics and the exact wording to hand over.
+`references/assembly.md` has the mechanics and the exact wording to hand over.
 
 ### The narration prompt
 
@@ -322,101 +331,74 @@ has the taste rules and the lines to cut on sight.
 - **the running time**, and the narration budget at 3 words/sec
 - **before you record** — the app running and reachable, signed in, data seeded
   and readable (realistic names, no `asdf`), a clean window, any setting that has
-  to start off
+  to start off. These go in the sheet's `preconditions` as well as in the
+  message: the app carries them, and somebody recording tomorrow reads the file
+  rather than this conversation.
 - **what the runs will actually do.** Corgy rehearses and then records, so
   **anything a scene commits, it commits twice** — and three scenes that each
   save something save it six times. If a scene saves a setting, sends an email,
   takes a payment, or deletes something, say so plainly and name the target.
-  Never let a user paste a prompt at production without knowing it writes there
+  Never hand somebody a sheet aimed at production without saying it writes there
   twice.
 - **open questions** — any step-map row you could not cite
 
-Then offer to record it, and stop.
+Then write the sheet and open the app on it, which is step 5.
 
-## 5. Record it, on their go-ahead
+## 5. Hand it over
 
-The `corgy` command *is* the Mac app — the same binary the bundle runs — so a
-scene can be recorded from here. That does not make it yours to start.
-
-**Never record a scene the user has not just agreed to.** Not the next one
-because the last one worked, not the whole plan because they approved the plan.
-The plan is agreement about the demo; a run is agreement to drive their screen
-and write to whatever the flow touches.
-
-That rule carries more weight than it looks. The app asks before it performs a
-plan — but only when it has a terminal to ask, and a run started from here has
-none, so **the app treats the missing tty as consent and the dialog never
-appears**. Your "shall I record scene 2?" is not a nicety in front of a real
-confirmation. It is the only one there is.
-
-Which is also why the commit-twice warning is now yours to enforce: Corgy walks
-the flow once to prove the targets resolve, then performs it again on the take.
-A scene that saves, sends, pays or deletes does it **twice**, with no dialog in
-between. Say what a scene writes to, in the same breath as offering to run it.
-
-### Before the first run
+Write the sheet, open the app on it, and stop.
 
 ```sh
-command -v corgy || ls -d /Applications/Corgy.app
+cat > /tmp/<demo-name>.json <<'JSON'
+{ …the plan… }
+JSON
+
+open -a Corgy /tmp/<demo-name>.json
 ```
 
-- **`corgy` answers** — good, use it.
-- **only the bundle answers** — the command is not on the PATH yet. Open Corgy,
-  Settings → Command line → Install, which links it into `~/.local/bin`. Or use
-  the full path, `/Applications/Corgy.app/Contents/MacOS/corgy`, which is the
-  same binary.
-- **neither answers** — Corgy is not installed. Say so; there is nothing to run.
+`references/sheet.md` has the format and the fields. Two rules from it that are
+easy to get wrong from here:
 
-One more thing to say once, before the first take: macOS grants Screen Recording
-and Accessibility to whatever *launches* corgy, and from here that is the
-terminal this session runs in — not Corgy.app. If the run comes back saying the
-permission is missing, that terminal is what needs granting in System Settings,
-and it needs restarting afterwards.
+- **`open -a Corgy <file>`, never `corgy --demo <file>`.** macOS attaches Screen
+  Recording and Accessibility to whatever *launched* the process, so a window
+  opened from your shell holds that terminal's grants rather than the app's.
+  `open` makes Corgy responsible for itself, and works whether or not it is
+  already running.
+- **Corgy 0.1.4 or newer.** An older copy launches and ignores the file, so the
+  window opens empty. That is Check for Updates, not a broken sheet.
 
-### Running a scene
+Then say what happens next, in a couple of lines: the takes are listed down the
+side, the selected one's prompt is already in the box, and Record is theirs to
+press. The app aims each later take into the video the first one made, so
+nothing has to be typed into "Add to video" by hand.
 
-The first take creates the video:
+And say what the runs will do, because the sheet is now a thing that can be run
+several times without you in the room: **Corgy rehearses and then records, so
+anything a scene commits, it commits twice.** Three scenes that each save
+something save it six times. Name the target - a setting, an email, a payment, a
+delete - in the same breath as handing the file over.
 
-```sh
-corgy "<scene 1's prompt>"
-```
+### If it does not open
 
-Every later take is aimed into it, at the second the assembly sheet gives:
-
-```sh
-corgy "<scene 2's prompt>" --into <video id> --at 12.5
-```
-
-`--into` and `--at` come as a pair; either alone is an error. The id comes from
-the first run's report, not from you.
-
-A run prints one JSON report. Read it rather than declaring victory:
-
-- `steps` — what it actually did, which is how you find out the planner took a
-  different route through the screen than you wrote
-- `duration`, `events` — whether the take is the length the plan budgeted
-- `uploadURL`, `uploadID` — the video, and the id later scenes need
-- `insertedInto`, `insertedAtMs` — where the take actually landed, which is not
-  always where it was aimed: a point inside a frozen frame or too close to a cut
-  snaps to the nearer edge
-- `warning` — say it back verbatim, never summarised away
-
-Then report what happened in a line or two and offer the next scene. If a run
-fails, say what the report said and what you would change about the prompt —
-then wait. A failed take is a reason to fix a step, never a reason to retry the
-same prompt twice.
+- **Nothing happens** — Corgy is not installed. `ls -d /Applications/Corgy.app`
+  says so; the disk image is at get.corgy.ai.
+- **The window opens empty** — an older Corgy, or a sheet it refused. The app
+  says which on stderr when it refuses, and the reasons are all in
+  `references/sheet.md`: a take with no prompt, a hold that carries one, a sheet
+  with no takes in it.
+- **The permission is missing** — the grant belongs to Corgy.app here, which is
+  what `open` is for. If it is still refused, System Settings > Privacy &
+  Security, then relaunch.
 
 ### What not to do
 
-- **No parallel scenes.** One screen, one recorder. Two runs fight over the
-  cursor and both takes are ruined.
-- **Nothing else on the machine while a take runs.** Your own tool calls are
-  fine — they do not touch the screen — but do not open, click or navigate
-  anything yourself during a run.
-- **Never `--yes`.** It exists for a piped run with nobody watching. Here it
-  suppresses a question that is already suppressed, and gains nothing.
-- **The holds and the narration stay in the editor.** Recording a take is a
-  command; freezing a frame and writing the script are the user's, in the app.
+- **Do not record anything.** The whole point of the sheet is that the person
+  whose screen it is presses the button.
+- **Do not write the sheet into their repository.** It is a working file for one
+  recording session; `/tmp` is where it belongs unless they ask otherwise.
+- **The holds and the narration stay in the editor.** The app says what is left
+  once the takes are in; `references/assembly.md` has the order and why two of
+  those steps destroy work when they are taken early.
 
 ## 6. Adapt
 
@@ -435,9 +417,15 @@ re-litigating:
 - **"shorter"** — cut a scene, not the seconds off every scene. A rushed take
   reads as a broken demo.
 
-Reprint only what changed — the affected scenes with their prompts, the
-assembly sheet if the order moved, and the narration prompt if the claim moved.
-Do not reprint the whole plan for a one-scene edit.
+Reprint only what changed — the affected scenes with their prompts, the order if
+it moved, and the narration prompt if the claim moved. Do not reprint the whole
+plan for a one-scene edit.
+
+Then **write the sheet again to the same path and open it again**. The app reads
+the file when it opens it, so a sheet edited on disk is not a sheet the window
+knows about - and a user recording from yesterday's scenes while reading today's
+message is the one failure this whole file arrangement exists to avoid. Say that
+the window has been reloaded, so nobody wonders which version is on screen.
 
 ## Taste
 

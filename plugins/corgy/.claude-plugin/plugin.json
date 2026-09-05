@@ -1,7 +1,7 @@
 {
   "name": "corgy",
-  "description": "Plans a product demo from your codebase — scenes, a recording prompt for each, and the narration — then records them with the Corgy macOS app on your go-ahead.",
-  "version": "1.0.0",
+  "description": "Plans a product demo from your codebase \u2014 scenes, a recording prompt for each, and the narration \u2014 then hands it to the Corgy macOS app as a demo sheet, which you record scene by scene.",
+  "version": "1.1.0",
   "author": {
     "name": "Stormkit"
   }

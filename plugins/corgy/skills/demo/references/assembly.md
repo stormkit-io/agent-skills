@@ -4,37 +4,30 @@ How scenes become one video. The order is not advice — two of these steps
 destroy work if they are taken early.
 
 Everything here happens in the Mac app or in the editor. Nothing here is an API
-call.
+call, and nothing here is something an agent does on somebody's behalf.
 
-## 1. Record scene 1
+## 1. Record the takes, in order
 
-In the Mac app. It creates the video. Its URL is `/videos/<id>`, and that id is
-what every later step needs — the assembly sheet should say so, since nothing
-else can know it in advance.
+From the window the sheet is open in. Pick a take, read the prompt in the box,
+press Record.
 
-## 2. Record each later take into it
+The first one creates the video. Every later one is aimed into it for you: the
+app reads the video and the moment back out of each run's report and fills in
+"Add to video" and "at" before you get there, so the takes land end to end
+without anybody typing an id.
 
-A take is aimed at a moment, and the moment is the playhead:
-
-- open the video and put the playhead where the scene goes
-- run `corgy "<that scene's prompt>" --into <id> --at <s>`, or type the id and
-  the time into the app window's own "Add to video" and "at" fields, which is
-  the path when `corgy` is not on the PATH
-
-The Add panel shows that command line ready to copy, with the id and the current
-playhead already filled in.
-
-The take lands at the moment it was aimed at; a landing inside an existing clip
-splits it. Aim again if the playhead has moved since — the editor says which
-moment it actually holds.
-
-Except where nothing can be cut. A point inside a frozen frame, or a sliver too
-close to an existing cut to leave a clip either side, snaps to the nearer edge
-of it instead — silently, and somewhere other than the playhead showed. Which is
-the reason the freezes come after every take, not before.
+Which is worth knowing when it looks wrong. The number in "at" is where the last
+take actually *landed*, not where it was pointed - a take aimed inside a frozen
+frame, or into a sliver too close to an existing cut to leave a clip either
+side, snaps silently to the nearer edge. That is also the reason the freezes
+come after every take rather than before.
 
 A take is its own run from its own start state. It does not inherit the previous
-scene's screen.
+scene's screen, which is why every scene in the sheet carries one.
+
+A run stopped part-way uploads nothing, so the scene stays unrecorded and the
+aim does not move. Record it again when the screen is back where the scene
+starts.
 
 ## 3. Add the holds
 

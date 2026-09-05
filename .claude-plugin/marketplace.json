@@ -7,7 +7,7 @@
     {
       "name": "corgy",
       "source": "./plugins/corgy",
-      "description": "Plans a product demo from your codebase — scenes, a recording prompt for each, and the narration — then records them with the Corgy macOS app on your go-ahead."
+      "description": "Plans a product demo from your codebase \u2014 scenes, a recording prompt for each, and the narration \u2014 then hands it to the Corgy macOS app as a demo sheet, which you record scene by scene."
     }
   ]
 }
