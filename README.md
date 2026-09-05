@@ -9,7 +9,7 @@ can install it as a plugin.
 
 | Skill | What it does |
 | --- | --- |
-| [corgy:demo](plugins/corgy/skills/demo) | Plans a product demo from your codebase — scenes, a recording prompt for each, and the narration — then records them with the [Corgy](https://corgy:demo.ai) macOS app on your go-ahead. |
+| [corgy:demo](plugins/corgy/skills/demo) | Plans a product demo from your codebase — scenes, a recording prompt for each, and the narration — then hands it to the [Corgy](https://corgy.ai) macOS app as a demo sheet, which you record scene by scene. |
 
 ## Install
 

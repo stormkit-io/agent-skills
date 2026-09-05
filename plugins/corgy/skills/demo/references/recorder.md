@@ -7,6 +7,11 @@ or Corgy itself — and a demo of a terminal and a browser is one video.
 Everything reaches Corgy through the app or the editor. Never `curl`, never an
 API call — not to drive a run, and not to read state either.
 
+And a planned demo reaches it as a file: `open -a Corgy <sheet>.json`, which is
+`references/sheet.md`. The command line below is what the app does with a take
+once somebody has pressed Record - useful to understand, not something to run
+for them.
+
 ## Reaching it
 
 ```sh
@@ -31,14 +36,16 @@ somebody has since cleaned is a command that resolves to nothing.
 
 Where neither answers, Corgy is not installed and there is nothing to drive.
 
-## The grant follows the launcher
+## The grant follows the launcher, which is why `open` is the way in
 
 macOS attaches Screen Recording and Accessibility to the *responsible process* —
 whatever launched the binary — never to the binary itself. Run from a shell,
 that is the terminal, not Corgy.app, and a permission the app holds does not
-help. So a run driven from an agent session needs **that terminal** granted in
-System Settings, and restarted afterwards. The failure report says as much, and
-names the application it means.
+help. So a run driven from an agent session needs **that terminal** granted in System
+Settings, and restarted afterwards - a second grant, for a process that has no
+business holding one. `open -a Corgy <sheet>.json` avoids the whole problem:
+LaunchServices makes the app responsible for itself, and it keeps the grants it
+already has. The failure report names the application it means.
 
 ## Writing a prompt for it
 
