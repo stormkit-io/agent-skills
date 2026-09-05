@@ -380,12 +380,17 @@ delete - in the same breath as handing the file over.
 
 ### If it does not open
 
-- **Nothing happens** — Corgy is not installed. `ls -d /Applications/Corgy.app`
-  says so; the disk image is at get.corgy.ai.
-- **The window opens empty** — an older Corgy, or a sheet it refused. The app
-  says which on stderr when it refuses, and the reasons are all in
-  `references/sheet.md`: a take with no prompt, a hold that carries one, a sheet
-  with no takes in it.
+- **`open` fails** — it exits non-zero and says why, which is the thing to
+  report. Usually Corgy is not installed; the disk image is at get.corgy.ai.
+  Do not go looking in `/Applications` to decide this: an app installed under
+  `~/Applications` opens perfectly well from there, and `open` is the only thing
+  that knows.
+- **The window opens empty** — an older Corgy, or a sheet it refused. **A
+  refusal is a dialog in Corgy, not something you can read**: opened this way
+  there is no stderr for you to see, and the app has no Dock icon, so the alert
+  can sit behind whatever else is on screen. Ask the user to bring Corgy to the
+  front and read it. The reasons are all in `references/sheet.md` - a take with
+  no prompt, a hold that carries one, a sheet with no takes in it.
 - **The permission is missing** — the grant belongs to Corgy.app here, which is
   what `open` is for. If it is still refused, System Settings > Privacy &
   Security, then relaunch.
@@ -421,11 +426,22 @@ Reprint only what changed — the affected scenes with their prompts, the order 
 it moved, and the narration prompt if the claim moved. Do not reprint the whole
 plan for a one-scene edit.
 
-Then **write the sheet again to the same path and open it again**. The app reads
-the file when it opens it, so a sheet edited on disk is not a sheet the window
-knows about - and a user recording from yesterday's scenes while reading today's
-message is the one failure this whole file arrangement exists to avoid. Say that
-the window has been reloaded, so nobody wonders which version is on screen.
+What happens to the sheet depends on whether anything has been recorded yet, and
+getting this wrong costs somebody their morning.
+
+**Before the first take** — write the sheet again to the same path and open it
+again. The app reads the file when it opens it, so a sheet edited on disk is not
+a sheet the window knows about, and somebody recording yesterday's scenes while
+reading today's message is the failure this whole arrangement exists to avoid.
+Say the window has been reloaded, so nobody wonders which version is on screen.
+
+**Once a take is in the video, do not reopen it.** Opening a sheet starts a new
+session: the recorded takes and the video they went into are forgotten, so the
+next take creates a *second* video and the demo becomes two halves that have to
+be reshot. Hand over the changed prompt for that one scene instead - they can
+paste it into the box, which is what the box is - and leave the window alone.
+If the change is big enough to want the whole sheet again, say plainly that it
+means starting the recording over.
 
 ## Taste
 

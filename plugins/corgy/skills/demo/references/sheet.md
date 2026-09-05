@@ -41,6 +41,7 @@ JSON
 
 | Field | Notes |
 | --- | --- |
+| `version` | Leave it out. It defaults to the format the app reads, and a number you invent is a sheet refused for being from the future. |
 | `title` | Required. Names the demo in the app's rail. |
 | `claim` | The one thing the whole demo argues. On screen while recording, which is what catches a take nobody needs. |
 | `narration` | The prompt for the Voice panel, written last. Kept here so it survives the recording session between planning it and using it. |
@@ -60,8 +61,8 @@ And per scene:
 | `freezeOn` | What a hold is frozen on. |
 
 A sheet is checked before the window opens: a take with no prompt, a hold that
-carries one, a sheet with no takes in it, or a version this app does not read is
-refused with a reason. Which is the point of a file — those are found before
+carries one, a sheet with no takes in it, or a `version` newer than the app
+reads is refused with a reason. Which is the point of a file — those are found before
 somebody has spent a run finding out.
 
 Holds are not listed in the app. They are made in the editor after the last

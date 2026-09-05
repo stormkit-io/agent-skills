@@ -16,11 +16,16 @@ app reads the video and the moment back out of each run's report and fills in
 "Add to video" and "at" before you get there, so the takes land end to end
 without anybody typing an id.
 
-Which is worth knowing when it looks wrong. The number in "at" is where the last
-take actually *landed*, not where it was pointed - a take aimed inside a frozen
-frame, or into a sliver too close to an existing cut to leave a clip either
-side, snaps silently to the nearer edge. That is also the reason the freezes
-come after every take rather than before.
+Which is worth knowing when it looks wrong. The number in "at" is the end of
+what has been recorded so far - where the last take landed plus how long it ran,
+both read back out of the run's report rather than taken from the sheet's
+estimate. So after an eighteen-second first take it reads 0:18, not 0:00, and a
+re-take of an earlier scene does not wind it back.
+
+Read back, because a take does not always land where it was aimed: one aimed
+inside a frozen frame, or into a sliver too close to an existing cut to leave a
+clip either side, snaps silently to the nearer edge. That is also the reason the
+freezes come after every take rather than before.
 
 A take is its own run from its own start state. It does not inherit the previous
 scene's screen, which is why every scene in the sheet carries one.
