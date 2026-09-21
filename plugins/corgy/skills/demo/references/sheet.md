@@ -29,6 +29,13 @@ cat > /tmp/how-corgy-works.json <<'JSON'
       "prompt": "Open Google Chrome\nNavigate to https://app.corgy.ai\nWait 3000ms"
     },
     {
+      "name": "Inside the demo",
+      "summary": "The timeline, opened from the list rather than from a URL",
+      "startState": "the demos list, where the first take ended (https://app.corgy.ai)",
+      "seconds": 14,
+      "prompt": "Click \"How Corgy works\"\nWait 3000ms"
+    },
+    {
       "kind": "hold",
       "name": "The hold",
       "seconds": 6,
@@ -55,7 +62,7 @@ And per scene:
 | `name` | Required. What the rail calls it. |
 | `kind` | `take` (the default) or `hold`. |
 | `summary` | What happens and what it proves. Shown under the scene while it is selected. |
-| `startState` | The screen this take starts from. Shown with the summary, and the thing most likely to be wrong when a take fails. |
+| `startState` | The screen this take starts from. Shown with the summary, and the thing most likely to be wrong when a take fails. On the entry take that is a URL; after it, name the screen and where it came from — "the apps list, where scene 1 ended" — with the URL in brackets as the way back for a take recorded out of order. |
 | `seconds` | The budget. The rail totals them into what the demo will run to. |
 | `prompt` | Required on a take, and refused on a hold. One imperative sentence per line. |
 | `freezeOn` | What a hold is frozen on. |
