@@ -27,8 +27,15 @@ inside a frozen frame, or into a sliver too close to an existing cut to leave a
 clip either side, snaps silently to the nearer edge. That is also the reason the
 freezes come after every take rather than before.
 
-A take is its own run from its own start state. It does not inherit the previous
-scene's screen, which is why every scene in the sheet carries one.
+A take is its own run, planned from the screen in front of it and nothing else —
+it knows nothing about the scene before it. The screen, though, is exactly where
+the last take left it: nothing resets between takes, which is what lets scene
+two open with a click rather than a URL.
+
+So leave the screen alone between takes. Every scene carries a start state for
+the times that is not true — a take re-recorded out of order, or a machine
+somebody used in between — and getting back to that screen first is what makes
+the take runnable again.
 
 A run stopped part-way uploads nothing, so the scene stays unrecorded and the
 aim does not move. Record it again when the screen is back where the scene

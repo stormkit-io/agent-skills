@@ -180,6 +180,9 @@ Rules, because "derived" is how a plan drifts back into a cursor tour:
 - **Every scene earns its place.** A take changes something visible; a hold has
   something on screen worth explaining. A scene that only navigates is deleted,
   and its destination becomes the next scene's start state.
+- **The scenes are one journey.** Scene 1 arrives; after that each scene begins
+  where the last one ended and reaches the next screen by clicking, not by
+  typing a URL. If no click joins two scenes, they are two demos.
 - **At least one hold**, before the payoff, never at the start.
 - **The problem gets a scene only if it is visible.** If the "before" cannot be
   shown, it belongs in the narration prompt, not in a scene.
@@ -234,12 +237,12 @@ on screen and what it proves — then the details, then the prompt:
 
     <one short paragraph: what happens, and what a viewer believes afterwards>
 
-    Start state: <url or app state, from the step map>
+    Start state: the marketing site, where scene 1 ended (https://example.com)
     Seconds:     <budget>
 
     ```
-    Open Google Chrome
-    Navigate to https://app.example.com
+    Click "Sign in"
+    Wait 2000ms
     Click "Continue with GitHub"
     Wait 3000ms
     ```
@@ -276,10 +279,34 @@ What the vocabulary rules out:
 - **Pacing is a flag.** "at an unhurried pace" is not in the schema. `--cps 12`
   is.
 
+**One entry, then click through.** The first take is the only one that types a
+URL. Every take after it starts from where the last one ended and gets to its
+screen the way a user would — clicking the app in the list, the tab in the nav,
+the row in the table. A `navigate` in the middle of a demo is the demo admitting
+it has no flow: it puts an address bar and a path nobody will ever type in place
+of the click that would have proved the product is navigable at all.
+
+That works because nothing resets the screen between takes. A take starts from
+whatever is in front of it when Record is pressed, which — if nobody has touched
+the machine — is the last frame of the take before it.
+
+So a later scene's start state is a screen rather than a URL: "the apps list for
+team Corgy, where scene 1 ended". Keep the URL beside it in brackets as the way
+back, for a take that has to be re-recorded out of order. That is a note for the
+person recording, never a step in the prompt.
+
+`navigate` still belongs in two places: the entry take, and a scene that starts
+somewhere no click can reach from the last frame — another application, a
+terminal, a link out of an email. When you use one, say which of the two it is.
+
+Clicking through spends steps that navigating skipped, so count them: two clicks
+and their waits come out of the same budget as everything else.
+
 Eight steps or fewer, so the scene stays clear of the planner's twelve-step
-ceiling. Each scene still needs its own start state — a later take does not
-inherit the previous scene's screen — and a control that only appears after
-another one still needs its opener as a step of its own.
+ceiling. Each scene still carries its own start state — a take is a fresh run,
+and the planner sees only the screen in front of it, not the plan it belongs to
+— and a control that only appears after another one still needs its opener as a
+step of its own.
 
 The recorder is the Mac app, and it resolves every target through the macOS
 accessibility tree: **never a CSS selector**, shortest distinctive label, and
@@ -287,7 +314,8 @@ every hand-over between applications spelled out, including the ones that go
 back. `references/recorder.md` — read it before writing prompts; the rules there
 fail the run, not the polish.
 
-Good — every line is one verb, and each application change is its own step:
+Good — an entry take: every line is one verb, and each application change is its
+own step:
 
 > Open Terminal
 > Type curl -sf https://install.example.com | sh

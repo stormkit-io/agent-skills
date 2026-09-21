@@ -62,6 +62,12 @@ accessibility tree.
   by opening that application, not by navigating to a URL. `navigate` types into
   a browser's address bar, so it is only for reaching a page — reaching one from
   a terminal means opening the browser first.
+- **`navigate` is for arriving, once.** It types a URL into the address bar on
+  camera, which is the right way to begin a demo and the wrong way to continue
+  one. After the entry take the screen is already where the last take left it,
+  so the next scene clicks its way onward — the app in the list, the tab in the
+  nav — and only navigates again when the scene starts somewhere no click can
+  reach.
 - **Name every hand-over, including the ones that go back.** Focus does not
   return on its own: a flow that leaves the terminal for Chrome and then needs
   the terminal again has to say "switch back to the terminal", or the typing
