@@ -27,7 +27,7 @@ and the stage records like any other take.
 
    ```json
    { "name": "Title", "startURL": "file:///tmp/<demo-name>/intro.html",
-     "prompt": "Key Space\nWait 4000ms" }
+     "pageOnly": true, "prompt": "Key Space\nWait 4000ms" }
    ```
 
    Space starts the animation; the wait is its length. Nothing to click, so
@@ -35,9 +35,8 @@ and the stage records like any other take.
 5. Insert it from just before the key press (`on_screen` says when): the
    frames before it are the card standing still.
 
-The browser toolbar is in the recording. For a card that is fine — it reads as
-part of the same browser as the rest of the demo. If it is not, keep the card
-for a hold's background instead and say so to the user.
+`pageOnly` keeps the browser's tabs and address bar out, so the card fills
+the frame. Design for 1440×813 on the default stage.
 
 ## Taste
 

@@ -9,6 +9,7 @@ nobody at the machine needs.
 | --- | --- | --- |
 | `unattended` | top level | `true` records every take back to back without asking, and writes the report. Without it the sheet only opens, for a person to record. |
 | `stage` | top level | `{ "browser": "Google Chrome", "width": 1440, "height": 900 }`, every field optional; `{}` is Chrome at 1440×900. Each take runs in a dedicated Chrome with its own profile, placed in the middle of the main display. Smaller than 640×400, or a browser other than Chrome, is refused. Only applies to unattended runs. |
+| `pageOnly` | per take | `true` records only the page, without Chrome's tabs and address bar. Use it on title cards and animations; leave it off on product footage, where the address bar shows the URL is real. Falls back to the whole window if the page cannot be found. |
 | `startURL` | per take | Loaded with the camera off before the take starts, then a short settle. `file://` works, which is how animations are recorded. Leave it out to start from wherever the last take ended. |
 
 What the app does that you do not have to:
