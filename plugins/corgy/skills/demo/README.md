@@ -102,3 +102,18 @@ The assembly sheet is ordered, and two steps destroy work if taken early. The
 narration is written over the whole timeline in one pass, and writing it again
 replaces every line — so it comes after the last take and the last freeze, and
 hand-edits come after that.
+
+## Or let it make the whole video
+
+```
+/corgy:make "a 60-second onboarding demo for our dashboard"
+```
+
+Same planning, then it records every take itself in a clean Chrome window,
+looks at each one, trims and assembles them, adds holds, zooms, the look and
+any title cards, writes the narration, and hands back a video to review in the
+editor. It asks before the voiceover (which costs credits) and before any take
+that writes somewhere real.
+
+Needs the Corgy Mac app with **Settings → Agents → Let agents record** on, and
+the Corgy MCP server connected. See `../make/SKILL.md`.
