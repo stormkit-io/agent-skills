@@ -100,7 +100,7 @@ An intro, an outro, a diagram that moves, a number counting up: build it as a
 self-contained HTML page and record it like any other take. `references/animations.md`
 has the recipe. In short: write `/tmp/<demo-name>/intro.html` sized to the
 stage, give the take `"startURL": "file:///tmp/<demo-name>/intro.html"` and a
-prompt that only waits for the animation to finish (`Wait 4000ms`). It goes
+prompt that starts it and waits (`Key Space`, then `Wait 4000ms`). It goes
 through the same pipeline as the product footage, so it gets the same look and
 the same frame size.
 
@@ -206,8 +206,12 @@ order; the rules that bite:
   its seconds. Find the frame with `get_frames`, never by guessing. Holds go
   after every take is in place — a take inserted inside a hold lands at its
   edge.
-- **Zooms.** `auto_zoom` once; it zooms where the takes clicked and typed.
-  Then look at the result and `remove_zoom` any that frame nothing.
+- **Zooms, by hand.** Stage takes are window captures, which record no click
+  positions, so `auto_zoom` can only zoom on the centre of the frame — on
+  cards and waits as much as clicks. Do not use it on staged takes. Place one
+  or two `add_zoom`s on what the claim depends on (an error heading, a filled-in
+  tag), aimed from a `get_frames` picture, and check them in the render.
+  When you `update_zoom`, pass both `zoom_x_permille` and `zoom_y_permille`.
 - **The look.** If the video belongs in a project (`list_projects`), file it
   with `set_project` and copy the project's look with `get_project_look` and
   `set_look`. Otherwise set a background, padding and corner radius that suit

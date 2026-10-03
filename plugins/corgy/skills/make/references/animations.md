@@ -13,17 +13,27 @@ and the stage records like any other take.
    so design for the stage size minus about 90 points of height (1440×810 for
    the default stage), and centre everything so a few points either way do not
    matter.
-3. Start the animation on load, finish it within the take, and hold the last
-   state — the take keeps recording until its wait ends.
+3. Start the animation on a key press, not on load: the camera starts a few
+   seconds after the page loads, so an animation that runs on load is over
+   before the take begins. Pause everything until a keydown, with a fallback:
+
+   ```html
+   <style>body:not(.go) *, body:not(.go) *::after { animation-play-state: paused !important; }</style>
+   <script>const go = () => document.body.classList.add("go"); addEventListener("keydown", go); setTimeout(go, 10000)</script>
+   ```
+
+   Finish within the take and hold the last state.
 4. The take:
 
    ```json
    { "name": "Title", "startURL": "file:///tmp/<demo-name>/intro.html",
-     "prompt": "Wait 4000ms" }
+     "prompt": "Key Space\nWait 4000ms" }
    ```
 
-   The wait is the length of the card. Nothing to click, so nothing to fail.
-5. Trim it in step 6 like any take: cut the page-load frames at the start.
+   Space starts the animation; the wait is its length. Nothing to click, so
+   nothing to fail.
+5. Insert it from just before the key press (`on_screen` says when): the
+   frames before it are the card standing still.
 
 The browser toolbar is in the recording. For a card that is fine — it reads as
 part of the same browser as the rest of the demo. If it is not, keep the card
