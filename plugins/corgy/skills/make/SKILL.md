@@ -69,7 +69,7 @@ them in full; the short version:
 {
   "title": "Dynamic pages on Stormkit",
   "unattended": true,
-  "stage": { "width": 1440, "height": 900 },
+  "stage": { "width": 1440, "height": 810 },
   "scenes": [
     { "name": "The result", "startURL": "https://sample.stormkit.dev/products/6",
       "prompt": "Wait 2000ms\nScroll down 400" },
@@ -82,7 +82,10 @@ them in full; the short version:
 - `unattended: true` — the app records the takes back to back, without asking.
 - `stage` — every take happens in a dedicated Chrome with its own profile, at
   this size. None of the user's tabs, extensions or sign-ins are on camera.
-  1440×900 is right for nearly everything; it records at twice that on Retina.
+  Use 1440×810, so product takes come out 16:9 (2880×1620 on Retina) and
+  match title cards and any 16:9 clip the user adds. Record `pageOnly` cards
+  in a separate sheet with a 1440×897 stage: the page alone is then exactly
+  1440×810. Every clip in a video should have the same shape.
 - `startURL` on a take — loaded with the camera off before the take starts.
   The entry take always has one. A later take has one only when it cannot be
   reached by a click from where the last take ended; without it, the stage

@@ -36,7 +36,8 @@ and the stage records like any other take.
    frames before it are the card standing still.
 
 `pageOnly` keeps the browser's tabs and address bar out, so the card fills
-the frame. Design for 1440×813 on the default stage.
+the frame. Record cards on a 1440×897 stage so the page is exactly 1440×810
+(16:9), and design for that.
 
 ## Taste
 
