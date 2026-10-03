@@ -30,7 +30,10 @@ An unattended sheet only records when all of these hold, and is refused with a
 reason otherwise:
 
 - **Let agents record** is on in Corgy → Settings → Agents
-  (`defaults read ai.corgy.recorder agentsMayRecord` prints `1`)
+  (`defaults read ai.corgy.recorder agentsMayRecord` prints `1`). From Corgy
+  0.1.14, a sheet that arrives while it is off asks the person once - Allow
+  turns it on and the run starts, Not now writes a `refused` report. A
+  downloaded sheet is refused without asking
 - the sheet was opened from outside the app — `open -a Corgy <file>`. Dropped
   on the window or picked in the Open panel, it only shows the takes and waits
   for Record

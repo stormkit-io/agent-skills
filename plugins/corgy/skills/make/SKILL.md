@@ -122,10 +122,14 @@ production project; go?". Read-only demos do not ask. This is the only question
 this skill asks before the voiceover.
 
 **Whether the app may record.** Run
-`defaults read ai.corgy.recorder agentsMayRecord`. Anything but `1` means the
-switch is off: tell the user to turn on **Corgy → Settings → Agents → Let
-agents record**, and wait. Do not try to set it yourself — it is the user's
-consent, and writing it from a shell is exactly what it exists to stop.
+`defaults read ai.corgy.recorder agentsMayRecord`. If it prints `1`, go on.
+Otherwise Corgy 0.1.14 and newer asks the person once, when the sheet opens:
+say "Corgy will ask you to allow agents to record; press Allow" and carry
+on. If the report then comes back `refused` because they declined, stop and
+say so. An older Corgy refuses instead of asking: tell the user to turn on
+**Corgy → Settings → Agents → Let agents record**, and wait. Never set it
+yourself - it is the person's consent, and writing it from a shell is
+exactly what it exists to stop.
 
 **Whether the stage is signed in.** If a take needs a login, the stage browser
 has its own profile and is signed out the first time. Ask the user once to use
