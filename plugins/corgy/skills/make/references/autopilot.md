@@ -30,7 +30,10 @@ An unattended sheet only records when all of these hold, and is refused with a
 reason otherwise:
 
 - **Let agents record** is on in Corgy → Settings → Agents
-  (`defaults read ai.corgy.recorder agentsMayRecord` prints `1`)
+  (`defaults read ai.corgy.recorder agentsMayRecord` prints `1`). From Corgy
+  0.1.14, a sheet that arrives while it is off asks the person once - Allow
+  turns it on and the run starts, Not now writes a `refused` report. A
+  downloaded sheet is refused without asking
 - the sheet was opened from outside the app — `open -a Corgy <file>`. Dropped
   on the window or picked in the Open panel, it only shows the takes and waits
   for Record
@@ -65,7 +68,7 @@ is opened, rewritten after every take.
 
 | Field | Notes |
 | --- | --- |
-| `state` | `recording`, then `done`, `failed` or `refused`. Only those last three end a run. |
+| `state` | `asking` while Corgy waits for the person to allow agents to record (0.1.14+), then `recording`, then `done`, `failed` or `refused`. Only those last three end a run. |
 | `error` | Why it failed or was refused, naming the take. |
 | `videoID` | The video the takes went into — the first take's recording. Present as soon as one take is in, so a failed run still says where its good takes are. |
 | `takes[].scene` | Index into the sheet's `scenes`, holds counted. |
