@@ -1,7 +1,7 @@
 {
   "name": "corgy",
   "description": "Plans and makes product demos from your codebase. /corgy:demo hands a scene plan to the Corgy macOS app for you to record; /corgy:make records it in a clean browser, edits and narrates it through the Corgy MCP server, and hands back a video to review.",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "author": {
     "name": "Stormkit"
   }
