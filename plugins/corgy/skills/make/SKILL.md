@@ -125,7 +125,8 @@ this skill asks before the voiceover.
 `defaults read ai.corgy.recorder agentsMayRecord`. If it prints `1`, go on.
 Otherwise Corgy 0.1.14 and newer asks the person once, when the sheet opens:
 say "Corgy will ask you to allow agents to record; press Allow" and carry
-on. If the report then comes back `refused` because they declined, stop and
+on. The report says `asking` until they answer; do not open the sheet again
+while it does, or the second sheet is refused. If the report then comes back `refused` because they declined, stop and
 say so. An older Corgy refuses instead of asking: tell the user to turn on
 **Corgy → Settings → Agents → Let agents record**, and wait. Never set it
 yourself - it is the person's consent, and writing it from a shell is

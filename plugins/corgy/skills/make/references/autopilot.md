@@ -68,7 +68,7 @@ is opened, rewritten after every take.
 
 | Field | Notes |
 | --- | --- |
-| `state` | `recording`, then `done`, `failed` or `refused`. Only those last three end a run. |
+| `state` | `asking` while Corgy waits for the person to allow agents to record (0.1.14+), then `recording`, then `done`, `failed` or `refused`. Only those last three end a run. |
 | `error` | Why it failed or was refused, naming the take. |
 | `videoID` | The video the takes went into — the first take's recording. Present as soon as one take is in, so a failed run still says where its good takes are. |
 | `takes[].scene` | Index into the sheet's `scenes`, holds counted. |
