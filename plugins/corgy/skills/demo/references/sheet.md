@@ -53,6 +53,8 @@ JSON
 | `claim` | The one thing the whole demo argues. On screen while recording, which is what catches a take nobody needs. |
 | `narration` | The prompt for the Voice panel, written last. Kept here so it survives the recording session between planning it and using it. |
 | `preconditions` | What has to be true before the first take. Parsed and carried, not shown in the window — say them in chat as well. |
+| `project` | The id of the project the video belongs in, from `list_projects`. The first take creates the video in it, starting with the project's voice and look. Leave it out when the demo belongs in no project. |
+| `project_settings` | `false` files the video under `project` but keeps the default voice and look. Only when the user asked for a video that does not follow its project; leave it out otherwise. |
 | `scenes` | Required, and at least one of them a take. |
 
 And per scene:

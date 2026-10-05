@@ -56,8 +56,15 @@ Two things change because the run records itself:
   it honest; a label you did not read from the source is a take that clicks the
   wrong thing with nobody there to stop it.
 
+**Find the project before planning.** Call `list_projects`. If the user named
+one, or the product plainly is one of them, that is the video's project: its
+voice and look are what the video starts with, so plan title cards and the
+narration around them. A new video takes a project's settings only when it is
+made, which is why the project goes into the sheet rather than being set later.
+
 Do not print the whole plan and wait. Print the claim, the scenes in one line
-each, and the running time, then go on to step 2. The user asked for a video.
+each, the project if there is one, and the running time, then go on to step 2.
+The user asked for a video.
 
 ## 2. Write the sheet
 
@@ -68,6 +75,7 @@ them in full; the short version:
 ```json
 {
   "title": "Dynamic pages on Stormkit",
+  "project": "<id from list_projects>",
   "unattended": true,
   "stage": { "width": 1440, "height": 810 },
   "scenes": [
@@ -79,6 +87,10 @@ them in full; the short version:
 }
 ```
 
+- `project` — the first take creates the video in this project, with its voice
+  and look. Leave it out when the demo belongs in no project. Add
+  `"project_settings": false` only if the user asked for a video that does not
+  follow the project.
 - `unattended: true` — the app records the takes back to back, without asking.
 - `stage` — every take happens in a dedicated Chrome with its own profile, at
   this size. None of the user's tabs, extensions or sign-ins are on camera.
@@ -220,10 +232,10 @@ order; the rules that bite:
   or two `add_zoom`s on what the claim depends on (an error heading, a filled-in
   tag), aimed from a `get_frames` picture, and check them in the render.
   When you `update_zoom`, pass both `zoom_x_permille` and `zoom_y_permille`.
-- **The look.** If the video belongs in a project (`list_projects`), file it
-  with `set_project` and copy the project's look with `get_project_look` and
-  `set_look`. Otherwise set a background, padding and corner radius that suit
-  the product's own colours.
+- **The look.** A video made in a project already has the project's voice and
+  look; `get_timeline` shows the project under `project`. Keep them unless the
+  user asked otherwise. A video in no project gets a background, padding and
+  corner radius that suit the product's own colours.
 - **Music**, only if the user gave you a file or the project library has a
   track: `upload_music` → the `curl` it returns → `finish_music`, then
   `update_music` to sit it well under the voice (volume around 150–250

@@ -394,6 +394,9 @@ easy to get wrong from here:
   already running.
 - **Corgy 0.1.4 or newer.** An older copy launches and ignores the file, so the
   window opens empty. That is Check for Updates, not a broken sheet.
+- **Put the project in the sheet.** Call `list_projects`; if the demo belongs
+  in one, set `"project"` to its id. The first take then creates the video in
+  that project, with its voice and look. Filing it later does not copy them.
 
 Then say what happens next, in a couple of lines: the takes are listed down the
 side, the selected one's prompt is already in the box, and Record is theirs to
