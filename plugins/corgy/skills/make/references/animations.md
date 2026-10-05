@@ -45,6 +45,10 @@ the frame. Record cards on a 1440×897 stage so the page is exactly 1440×810
   `get_project` when it has one, otherwise the repo's CSS or Tailwind config,
   or the live site. A card loads nothing from the network, so use the brand's
   font only if it is installed on this Mac, and the closest system font if not
+- the project's own logo and fonts, from the `assets` `get_project` lists.
+  Download each one you use next to the card first (`curl -fsS -o
+  /tmp/<demo-name>/logo.svg '<url>'` - the url lasts an hour) and refer to the
+  local copy; a font file is loaded with `@font-face` from that copy
 - one idea per card, readable in two seconds: the claim, or the URL to go to
 - motion that explains (a request travelling, a list filling) beats motion
   that decorates
