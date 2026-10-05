@@ -237,8 +237,11 @@ the user asks for it — it costs credits and replaces every line.
 
 The demo skill's `references/narration.md` has the taste rules. On top of them:
 
-- one line per beat, placed with `start_ms` at the moment it is about —
-  `on_screen` says when things happen
+- write the whole script first, as one passage read aloud, then split it into
+  lines; a line is a sentence of that passage, never a caption. "Sound like a
+  person" in `narration.md` has the before and after
+- place each line with `start_ms` at the moment it is about — `on_screen` says
+  when things happen
 - about 3 words per second of the stretch it covers; a line that runs past the
   next action is a line to cut or a hold to add
 - the hold scenes are where the explaining goes; the takes carry short lines
