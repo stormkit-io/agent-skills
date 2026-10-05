@@ -41,8 +41,10 @@ the frame. Record cards on a 1440×897 stage so the page is exactly 1440×810
 
 ## Taste
 
-- the product's own colours and typeface — read them from the repo's CSS or
-  Tailwind config, or the live site
+- the product's own colours and typeface — the project's brand from
+  `get_project` when it has one, otherwise the repo's CSS or Tailwind config,
+  or the live site. A card loads nothing from the network, so use the brand's
+  font only if it is installed on this Mac, and the closest system font if not
 - one idea per card, readable in two seconds: the claim, or the URL to go to
 - motion that explains (a request travelling, a list filling) beats motion
   that decorates

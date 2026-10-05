@@ -57,10 +57,18 @@ Two things change because the run records itself:
   wrong thing with nobody there to stop it.
 
 **Find the project before planning.** Call `list_projects`. If the user named
-one, or the product plainly is one of them, that is the video's project: its
-voice and look are what the video starts with, so plan title cards and the
-narration around them. A new video takes a project's settings only when it is
-made, which is why the project goes into the sheet rather than being set later.
+one, or the product plainly is one of them, that is the video's project. Read it
+with `get_project`: its voice and look are what the video starts with, and its
+brand is the colours and font to make title cards and outros in. Its tone is how
+the narration should sound; `write_script` and `rewrite_line` use it on their
+own, and your own lines should match it. A new video takes a project's settings
+only when it is made, which is why the project goes into the sheet rather than
+being set later.
+
+A project with no brand yet: read the product's colours and typeface from the
+repo or the live site as usual, and once the video is handed over offer, in one
+line, to save them with `set_brand` so the next video starts from them. Never
+overwrite a brand the user set without asking.
 
 Do not print the whole plan and wait. Print the claim, the scenes in one line
 each, the project if there is one, and the running time, then go on to step 2.
