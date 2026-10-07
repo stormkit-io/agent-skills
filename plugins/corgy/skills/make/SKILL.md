@@ -47,8 +47,14 @@ voice should sound. Getting either wrong means a video that is rebuilt or
 re-voiced, so ask before planning - once, in a single `AskUserQuestion` call
 with up to two questions.
 
-First call `list_projects`, and `get_project` for the product's project if it
-has one (step 1 needs it anyway). Then ask only what is still open:
+First read the brief the way the demo skill's step 0 does, so you know which
+product this is, then call `list_projects`, and `get_project` for the
+product's project if it has one (step 1 needs it anyway). Then ask only what
+is still open:
+
+- **What the demo is for** - only when there is no brief at all. This is the
+  demo skill's own step 0 question; ask it here, in the same call, rather than
+  as a second question later. Its answer may settle the format too.
 
 - **Format** - skip it when the brief already says ("an onboarding demo", "a
   launch teaser", "animated").
@@ -82,9 +88,11 @@ The answers shape the rest:
 | Recording | step 2 as written | `references/animations.md`, "A whole video" | either | step 2 as written |
 
 The voice decides how the script is written (step 7) and which voice reads it.
-After the hand-over, if the video is in a project with no tone yet, offer in
-one line to save the chosen voice as the project's tone with `set_brand`, so
-the next video does not ask.
+After the hand-over, if the user picked the voice in step 0's question and the
+video is in a project with no tone yet, offer in one line to save it as the
+project's tone with `set_brand` - saying it becomes the default for every video
+of the product, so the next one does not ask. A voice the brief named for this
+one video ("an energetic teaser") is not offered as the default.
 
 ## 1. Plan
 
@@ -94,6 +102,11 @@ URL and label, and derive the scenes. The rules there — one claim, three to
 five scenes, prompts as one verb per line, never an invented URL — are the
 difference between a demo and a cursor tour, and none of them get looser
 because nobody is reading the plan first.
+
+The format from step 0 is a shape the user gave, and it overrides the demo
+skill's step 3 the way a requested cut does: the scene count, the running time
+and the holds come from step 0's table. A teaser or an animated video has no
+hold; a tutorial may have several.
 
 Two things change because the run records itself:
 
@@ -320,13 +333,17 @@ the voice" section how each voice from step 0 writes. On top of them:
   person" in `narration.md` has the before and after
 - place each line with `start_ms` at the moment it is about — `on_screen` says
   when things happen
-- about 3 words per second of the stretch it covers; a line that runs past the
-  next action is a line to cut or a hold to add
+- about 3 words per second of the stretch it covers (2 for a calm voice); a
+  line that runs past the next action is a line to cut or a hold to add
 - the hold scenes are where the explaining goes; the takes carry short lines
   or none
 
-Pick the voice that reads it to suit: a project's voice stays, otherwise
-`list_voices` and `set_voice` for one whose description fits the chosen voice.
+Pick the voice that reads it to suit. A project's voice stays when nobody chose
+a voice in step 0, or the choice matches the project's tone. When the user
+picked a different one, `list_voices` and `set_voice` for a voice whose
+description fits it. In that case write and change lines yourself with
+`add_line` and `update_line`: `write_script` and `rewrite_line` read the
+project's tone on their own and would undo the choice.
 
 Then **stop and ask.** Print the script — every line with its time — and the
 cost: `generate_voiceover` charges 2 credits per spoken second, so give the

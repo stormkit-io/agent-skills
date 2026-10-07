@@ -93,7 +93,8 @@ taste rules above hold for every voice; what changes is the register.
   each step, nothing urgent.
 
 A product's own landing-page copy is usually written to be read, not heard:
-punchy, complete-sentence slogans that sound like an ad when spoken. Keep its
+punchy fragments ("Ship faster. Zero config.") that sound like an ad when
+spoken. Keep its
 words and claims, but rewrite them in the chosen voice.
 
 ### Only say what is true
