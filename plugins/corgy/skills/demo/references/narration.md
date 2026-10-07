@@ -78,6 +78,25 @@ Prefer — the same beats, carried by one sentence into the next:
 - Fewer, longer lines over a take beat many short ones. Silence is fine where
   nothing new happens.
 
+### Match the voice
+
+The user picks how the video should sound - or the project's `tone` says. The
+taste rules above hold for every voice; what changes is the register.
+
+- **Friendly** - talk to one person. Contractions, "you", an easy "so" or "and
+  that's it". The Curious script above is friendly.
+- **Professional** - full sentences, no slang, no exclamation marks. Say what
+  it does and what that saves, plainly.
+- **Energetic** - shorter sentences, active verbs, the payoff early. Still
+  sentences, never a run of fragments.
+- **Calm** - slower: fewer words per second (2 rather than 3), a pause after
+  each step, nothing urgent.
+
+A product's own landing-page copy is usually written to be read, not heard:
+punchy fragments ("Ship faster. Zero config.") that sound like an ad when
+spoken. Keep its
+words and claims, but rewrite them in the chosen voice.
+
 ### Only say what is true
 
 A "no X" list is the fastest way to say something false. Every "no account",
