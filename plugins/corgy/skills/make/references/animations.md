@@ -75,3 +75,23 @@ the frame. Record cards on a 1440×897 stage so the page is exactly 1440×810
   <p>Dynamic pages on a static site</p>
 </main>
 ```
+
+## A whole video
+
+The animated format from step 0 is one page holding the whole video: scenes
+shown in turn on a timer, each one a piece of the product's landing page
+rebuilt and set in motion - the headline with its highlight drawing in, a URL
+typing into the input, a score counting up, issue cards sliding in, a feature
+grid popping in, the end card. Same recipe as a card, longer:
+
+- build each piece from the live page: its copy, its colours, its numbers.
+  The landing page's own example (a sample report, a demo account) is fair to
+  show; a figure the page does not show is not yours to make up
+- one `show(scene)` timeline in the page's script, started on the key press,
+  5 seconds or so a scene; a scene leaves as the next arrives
+- record it as one `pageOnly` take on the 1440×897 stage. Cover the whole
+  timeline with waits of 10 seconds or less (`Wait 10000ms` three times for a
+  28-second page): a take can end short of one long wait, cutting off the end
+  card. Check the last frame shows the end card before assembling
+- no holds and no zooms: the page already paces and frames itself. Trim the
+  blank frames before the key press, then narrate one line per scene

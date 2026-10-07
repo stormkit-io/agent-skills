@@ -2,7 +2,7 @@
 name: make
 license: MIT
 compatibility: Needs the Corgy macOS app (corgy.ai) with "Let agents record" turned on in Settings → Agents, and the Corgy MCP server connected (https://api.corgy.ai/api/mcp). Without the app it stops after the plan; without the MCP server it stops after the recording.
-description: Make a finished, narrated product demo from one prompt — `/corgy:make "a 60-second onboarding demo for Acme"`. Plans the scenes from the repo (or the web), records every take itself in a clean Chrome window through the Corgy Mac app, checks each take by looking at it, cuts and assembles the video through the Corgy MCP server, adds holds, zooms, the look, music and any animated title cards, writes the narration, and hands back a video ready to review in the editor. Asks before anything that costs credits (the voiceover) and before any take that writes somewhere real. Use when the user wants the whole video made for them rather than a plan to record — "make me a demo", "produce the video", "/corgy:make". For a plan the user records themselves, use /corgy:demo instead.
+description: Make a finished, narrated product demo from one prompt — `/corgy:make "a 60-second onboarding demo for Acme"`. Plans the scenes from the repo (or the web), records every take itself in a clean Chrome window through the Corgy Mac app, checks each take by looking at it, cuts and assembles the video through the Corgy MCP server, adds holds, zooms, the look, music and any animated title cards, writes the narration, and hands back a video ready to review in the editor. Asks up front what kind of video it is (product demo, animated marketing video, launch teaser, tutorial) and how the voice should sound, when the prompt leaves them open; then asks before anything that costs credits (the voiceover) and before any take that writes somewhere real. Use when the user wants the whole video made for them rather than a plan to record — "make me a demo", "produce the video", "/corgy:make". For a plan the user records themselves, use /corgy:demo instead.
 ---
 
 # Make a demo
@@ -26,7 +26,8 @@ The only `curl` you run is the one `upload_music` hands you, to a signed link.
 
 ## The loop
 
-1. **Plan** — the demo skill's steps 0 to 3, unchanged
+0. **Ask the format and the voice** — one question, only what the brief leaves open
+1. **Plan** — the demo skill's steps 0 to 3, shaped by the format
 2. **Write the sheet** for a self-recording run
 3. **Check before rolling** — what the run will touch, and whether it may
 4. **Record** — open the sheet, follow the report
@@ -35,8 +36,55 @@ The only `curl` you run is the one `upload_music` hands you, to a signed link.
 7. **Narrate** — write the lines yourself, ask before the voiceover
 8. **Review the render** and hand it over
 
-Nothing in 1 to 6 needs the user. Say what you are doing in one line at each
-step so they can watch it happen, and keep going.
+After step 0, nothing in 1 to 6 needs the user. Say what you are doing in one
+line at each step so they can watch it happen, and keep going.
+
+## 0. Ask the format and the voice
+
+Two choices decide most of what follows, and they are the user's taste rather
+than anything the repo can tell you: what kind of video this is, and how the
+voice should sound. Getting either wrong means a video that is rebuilt or
+re-voiced, so ask before planning - once, in a single `AskUserQuestion` call
+with up to two questions.
+
+First call `list_projects`, and `get_project` for the product's project if it
+has one (step 1 needs it anyway). Then ask only what is still open:
+
+- **Format** - skip it when the brief already says ("an onboarding demo", "a
+  launch teaser", "animated").
+  - **Product demo** - the real product, recorded and clicked through. The
+    default for "make a demo".
+  - **Animated marketing video** - no screen recording: the product's own
+    landing-page pieces (headline, input, score, feature grid) rebuilt as one
+    animated page. For a product that cannot be recorded signed out, or when
+    the user wants a promo rather than a walkthrough.
+  - **Launch teaser** - 15 to 30 seconds, fast, ends on the URL. For a post
+    on X or Product Hunt.
+  - **Tutorial** - slower, every step shown, more holds. For docs and
+    onboarding.
+- **Voice** - skip it when the brief says, or the project already has a
+  `tone`; a project's tone is the user's answer from last time.
+  - **Friendly** - warm, conversational, contractions; a person showing a friend.
+  - **Professional** - clear and measured; for a company page or a sales deck.
+  - **Energetic** - punchy and upbeat; for launches.
+  - **Calm** - slow and patient; for tutorials.
+
+Put the likeliest option first for this product and mark it recommended. When
+the brief settles both, ask nothing and go on.
+
+The answers shape the rest:
+
+| | Product demo | Animated | Teaser | Tutorial |
+| --- | --- | --- | --- | --- |
+| Scenes | 3 to 5 takes | one animated page, 4 to 6 beats | 2 or 3 takes, or animated | one per step |
+| Running time | 45 to 90 s | 25 to 40 s | 15 to 30 s | as long as the steps take |
+| Holds | one, before the payoff | none; the animation paces itself | none | one per step that needs explaining |
+| Recording | step 2 as written | `references/animations.md`, "A whole video" | either | step 2 as written |
+
+The voice decides how the script is written (step 7) and which voice reads it.
+After the hand-over, if the video is in a project with no tone yet, offer in
+one line to save the chosen voice as the project's tone with `set_brand`, so
+the next video does not ask.
 
 ## 1. Plan
 
@@ -72,8 +120,14 @@ line, to save them with `set_brand` so the next video starts from them - and
 any logo you had to fetch with `upload_asset`. Never overwrite a brand or remove
 an asset the user set without asking.
 
-Do not print the whole plan and wait. Print the claim, the scenes in one line
-each, the project if there is one, and the running time, then go on to step 2.
+An animated format skips the demo skill's step map for the product's screens:
+the step map is the landing page instead, every headline, label and number on
+the page cited from the page you fetched. Never invent a number for a score or
+a stat; use the ones the site shows.
+
+Do not print the whole plan and wait. Print the format and voice, the claim,
+the scenes in one line each, the project if there is one, and the running time,
+then go on to step 2.
 The user asked for a video.
 
 ## 2. Write the sheet
@@ -140,8 +194,8 @@ Three things, in this order.
 commits: a setting saved, an email sent, a payment, a delete, a deploy, a
 message posted. If any take does, stop and ask in one short message, naming the
 target and the account — "scene 3 saves the digest setting on team Corgy's
-production project; go?". Read-only demos do not ask. This is the only question
-this skill asks before the voiceover.
+production project; go?". Read-only demos do not ask. Apart from step 0, this
+is the only question this skill asks before the voiceover.
 
 **Whether the app may record.** Run
 `defaults read ai.corgy.recorder agentsMayRecord`. If it prints `1`, go on.
@@ -191,7 +245,8 @@ Opening a sheet again starts a **new** video. So to redo or finish takes:
    recorded take, `source_video_id` is its `recordingID`, `in_ms` 0, `out_ms`
    its `durationMs`, and `at_ms` the end of the real video (its `duration_ms`
    from `get_timeline`), or the moment the take belongs at
-4. leave the scratch video alone; it is the user's to delete
+4. keep the scratch video: the inserted takes still play from its recording,
+   and Corgy refuses to delete a recording another video uses
 
 The usual failures, and what to change:
 
@@ -257,7 +312,8 @@ Write the lines yourself with `add_line`. It is free, and you know what every
 take is for, which the automatic writer does not. Use `write_script` only if
 the user asks for it — it costs credits and replaces every line.
 
-The demo skill's `references/narration.md` has the taste rules. On top of them:
+The demo skill's `references/narration.md` has the taste rules, and its "Match
+the voice" section how each voice from step 0 writes. On top of them:
 
 - write the whole script first, as one passage read aloud, then split it into
   lines; a line is a sentence of that passage, never a caption. "Sound like a
@@ -268,6 +324,9 @@ The demo skill's `references/narration.md` has the taste rules. On top of them:
   next action is a line to cut or a hold to add
 - the hold scenes are where the explaining goes; the takes carry short lines
   or none
+
+Pick the voice that reads it to suit: a project's voice stays, otherwise
+`list_voices` and `set_voice` for one whose description fits the chosen voice.
 
 Then **stop and ask.** Print the script — every line with its time — and the
 cost: `generate_voiceover` charges 2 credits per spoken second, so give the
@@ -291,7 +350,8 @@ Then hand over, short:
 - the claim and the running time
 - what you did that they might not expect — a take re-recorded, a scene dropped
 - what is waiting on them: the script approval and the voiceover, if not done
-- any scratch videos left from re-recording, for them to delete
+- any scratch videos left from re-recording, and that they hold footage the
+  video plays - they cannot be deleted while it does
 
 Do not export at high quality unless asked; the user will want to change
 things first, and that is what the editor is for.
