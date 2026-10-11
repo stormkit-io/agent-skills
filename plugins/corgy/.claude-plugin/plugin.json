@@ -6,10 +6,12 @@
     "name": "Stormkit",
     "url": "https://www.corgy.ai"
   },
-  "homepage": "https://www.corgy.ai/getting-started",
+  "homepage": "https://www.corgy.ai",
+  "documentationUrl": "https://www.corgy.ai/getting-started",
   "repository": "https://github.com/stormkit-io/agent-skills",
   "license": "MIT",
   "privacyPolicyUrl": "https://www.corgy.ai/privacy",
+  "termsOfServiceUrl": "https://www.corgy.ai/terms",
   "keywords": [
     "demo",
     "video",
