@@ -1,7 +1,7 @@
 ---
 name: make
 license: MIT
-compatibility: Needs the Corgy macOS app (corgy.ai) with "Let agents record" turned on in Settings → Agents, and the Corgy MCP server connected (https://api.corgy.ai/api/mcp). Without the app it stops after the plan; without the MCP server it stops after the recording.
+compatibility: Needs the Corgy macOS app (corgy.ai) with "Let agents record" turned on in Settings → Agents, and the Corgy MCP server connected (https://api.corgy.ai/api/mcp; the plugin connects it and asks the user to sign in once). Without the app it stops after the plan; without the MCP server it stops after the recording.
 description: Make a finished, narrated product demo from one prompt — `/corgy:make "a 60-second onboarding demo for Acme"`. Plans the scenes from the repo (or the web), records every take itself in a clean Chrome window through the Corgy Mac app, checks each take by looking at it, cuts and assembles the video through the Corgy MCP server, adds holds, zooms, the look, music and any animated title cards, writes the narration, and hands back a video ready to review in the editor. Asks up front what kind of video it is (product demo, animated marketing video, launch teaser, tutorial) and how the voice should sound, when the prompt leaves them open; then asks before anything that costs credits (the voiceover) and before any take that writes somewhere real. Use when the user wants the whole video made for them rather than a plan to record — "make me a demo", "produce the video", "/corgy:make". For a plan the user records themselves, use /corgy:demo instead.
 ---
 
@@ -18,8 +18,12 @@ You drive two things:
 - **the Corgy Mac app**, by writing a demo sheet and opening it. With
   `"unattended": true` it records every take on its own, in a clean Chrome
   window of a fixed size, and writes a report beside the sheet as it goes.
-- **the Corgy MCP server** (`mcp__corgy__*`), which edits the video the takes
-  went into: cuts, holds, zooms, narration, look, music, export.
+- **the Corgy MCP server**, which edits the video the takes went into: cuts,
+  holds, zooms, narration, look, music, export. Its tools carry whichever
+  prefix the user's setup gave them: `mcp__plugin_corgy_corgy__*` from this
+  plugin, `mcp__claude_ai_Corgy__*` from a Claude.ai connector, or
+  `mcp__corgy__*` when connected by hand. Use whichever is there. If none is,
+  ask the user to run `/mcp` and sign in to Corgy.
 
 You never call the Corgy API any other way — no `curl` to api.corgy.ai, ever.
 The only `curl` you run is the one `upload_music` hands you, to a signed link.

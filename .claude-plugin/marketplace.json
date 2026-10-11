@@ -3,6 +3,9 @@
   "owner": {
     "name": "Stormkit"
   },
+  "metadata": {
+    "description": "Stormkit's agent skills: Corgy, which plans and makes narrated product demos from your codebase."
+  },
   "plugins": [
     {
       "name": "corgy",

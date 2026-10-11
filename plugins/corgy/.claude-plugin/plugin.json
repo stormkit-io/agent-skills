@@ -1,8 +1,13 @@
 {
   "name": "corgy",
   "description": "Plans and makes product demos from your codebase. /corgy:demo hands a scene plan to the Corgy macOS app for you to record; /corgy:make records it in a clean browser, edits and narrates it through the Corgy MCP server, and hands back a video to review.",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "author": {
-    "name": "Stormkit"
-  }
+    "name": "Stormkit",
+    "url": "https://www.corgy.ai"
+  },
+  "homepage": "https://www.corgy.ai/getting-started",
+  "repository": "https://github.com/stormkit-io/agent-skills",
+  "license": "MIT",
+  "keywords": ["demo", "video", "screen-recording", "narration", "voiceover", "product-demo", "walkthrough"]
 }
