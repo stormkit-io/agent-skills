@@ -9,6 +9,7 @@ can install it as a plugin.
 
 | Skill | What it does |
 | --- | --- |
+| [corgy:make](plugins/corgy/skills/make) | Makes a finished, narrated product demo from one prompt — plans it from your codebase, records every take through the [Corgy](https://corgy.ai) macOS app, then cuts, narrates and hands back a video to review through the Corgy MCP server. |
 | [corgy:demo](plugins/corgy/skills/demo) | Plans a product demo from your codebase — scenes, a recording prompt for each, and the narration — then hands it to the [Corgy](https://corgy.ai) macOS app as a demo sheet, which you record scene by scene. |
 
 ## Install
@@ -19,6 +20,10 @@ In Claude Code, add the marketplace once and then take what you want:
 /plugin marketplace add stormkit-io/agent-skills
 /plugin install corgy@stormkit
 ```
+
+The Corgy plugin also connects the Corgy MCP server; run `/mcp` once and sign
+in to Corgy when it asks. See [the plugin's README](plugins/corgy/README.md) for
+what it needs.
 
 Adding the marketplace installs nothing on its own. It registers the catalogue;
 each plugin is installed by name.
@@ -36,6 +41,7 @@ whatever your agent reads, or handed to it as context directly.
 .claude-plugin/marketplace.json   the catalogue
 plugins/<name>/
 ├── .claude-plugin/plugin.json    what gets installed
+├── .mcp.json                     MCP servers the plugin connects, if any
 └── skills/<name>/SKILL.md        the skill itself
 ```
 

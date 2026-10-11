@@ -1,0 +1,6 @@
+{
+  "corgy": {
+    "type": "http",
+    "url": "https://api.corgy.ai/api/mcp"
+  }
+}
