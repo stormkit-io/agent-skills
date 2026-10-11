@@ -26,7 +26,8 @@ You drive two things:
   ask the user to run `/mcp` and sign in to Corgy.
 
 You never call the Corgy API any other way — no `curl` to api.corgy.ai, ever.
-The only `curl` you run is the one `upload_music` hands you, to a signed link.
+The only `curl` you run is against a signed link the MCP server hands you: the
+upload `upload_music` returns, or a project asset you download for a title card.
 
 ## The loop
 
