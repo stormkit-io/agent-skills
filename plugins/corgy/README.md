@@ -42,9 +42,29 @@ flows. Outside it, it researches the product's site and says so.
 Nothing is published unless you ask: the finished video opens in the Corgy
 editor for you to review, and a public share page is made only on request.
 
+## What it runs and sends
+
+The plugin has no hooks, scripts or local servers. Its skills tell Claude to:
+
+- **Read your repository** to plan the demo, or the product's public website
+  when you are not in its repository.
+- **Write files under `/tmp`**: the demo sheet (`/tmp/<demo-name>.json`), and
+  for `/corgy:make` any title cards (`/tmp/<demo-name>/*.html`) and the brand
+  assets they use.
+- **Run `open -a Corgy <sheet>.json`** to hand the sheet to Corgy for Mac, and
+  read the progress report the app writes beside it.
+- **Call the Corgy MCP server** at `https://api.corgy.ai/api/mcp`, signed in as
+  you, to edit, narrate, export and, only when you ask, publish the video.
+- **Run `curl`** only against links the Corgy MCP server returns: to download
+  your project's logo and fonts from your Corgy account, and to upload a music
+  file you choose to Corgy's storage.
+
+Nothing is sent anywhere other than Corgy.
+
 ## Data
 
-Recordings, scripts and voiceovers are stored in your Corgy account. See the
+Recordings, scripts and voiceovers are stored in your Corgy account. Takes are
+recorded on your Mac by Corgy for Mac and uploaded to your account. See the
 [privacy policy](https://www.corgy.ai/privacy).
 
 ## Support
