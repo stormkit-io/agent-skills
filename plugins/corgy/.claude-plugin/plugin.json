@@ -9,5 +9,14 @@
   "homepage": "https://www.corgy.ai/getting-started",
   "repository": "https://github.com/stormkit-io/agent-skills",
   "license": "MIT",
-  "keywords": ["demo", "video", "screen-recording", "narration", "voiceover", "product-demo", "walkthrough"]
+  "privacyPolicyUrl": "https://www.corgy.ai/privacy",
+  "keywords": [
+    "demo",
+    "video",
+    "screen-recording",
+    "narration",
+    "voiceover",
+    "product-demo",
+    "walkthrough"
+  ]
 }
