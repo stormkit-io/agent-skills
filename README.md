@@ -28,6 +28,12 @@ what it needs.
 Adding the marketplace installs nothing on its own. It registers the catalogue;
 each plugin is installed by name.
 
+## ChatGPT and Codex
+
+`plugins/corgy` is also an Agent Plugins package (`plugin.json`, `mcp.json`,
+`skills/` at its root), which ChatGPT and Codex install. See
+[its README](plugins/corgy/README.md#chatgpt-and-codex) for what works where.
+
 ## Using them elsewhere
 
 Every skill's frontmatter sticks to the six fields in the Agent Skills spec —
@@ -40,8 +46,10 @@ whatever your agent reads, or handed to it as context directly.
 ```
 .claude-plugin/marketplace.json   the catalogue
 plugins/<name>/
-├── .claude-plugin/plugin.json    what gets installed
-├── .mcp.json                     MCP servers the plugin connects, if any
+├── .claude-plugin/plugin.json    what Claude Code installs
+├── .mcp.json                     MCP servers, for Claude Code
+├── plugin.json                   what ChatGPT and Codex install (Agent Plugins)
+├── mcp.json                      MCP servers, for ChatGPT and Codex
 └── skills/<name>/SKILL.md        the skill itself
 ```
 
