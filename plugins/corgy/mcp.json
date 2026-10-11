@@ -1,0 +1,23 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "corgy": {
+      "type": "streamable-http",
+      "url": "https://api.corgy.ai/api/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "dcr",
+              "registrationUrl": "https://api.corgy.ai/_stormkit/oauth/register"
+            },
+            "authorizationUrl": "https://api.corgy.ai/_stormkit/oauth/authorize",
+            "tokenUrl": "https://api.corgy.ai/_stormkit/oauth/token",
+            "baseScopes": ["openid", "email", "profile", "offline_access"]
+          }
+        }
+      }
+    }
+  }
+}

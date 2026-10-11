@@ -2,7 +2,7 @@
 name: demo
 license: MIT
 compatibility: Plans demos for any product. Recording one needs the Corgy macOS app (corgy.ai) 0.1.4 or newer, installed and signed in; without it the skill still produces the plan, the prompts and the narration, and the sheet it writes keeps until there is an app to open it with.
-description: Plan a product demo and hand it to the Corgy macOS app. Takes the brief as an argument — `/corgy:demo "an onboarding demo for Acme"` — works out what the product is from the repo you are standing in, or from the web when the repo is not here, and comes back with a summary, a scene plan with the recording prompt under each scene, and a narration prompt. Then writes it all as a demo sheet and opens Corgy on it, where the takes are listed and each one is aimed into the video the first take made, for the user to record scene by scene. Use when the user wants a demo, an onboarding video, a release clip, a changelog GIF, or says "record a demo", "show this off", "/corgy:demo". Adapts the plan to their feedback — drop a scene, merge it into one cut, change the order — and rewrites the sheet. Never records anything itself: pressing Record stays with the person whose screen it is.
+description: Plan a product demo and hand it to the Corgy macOS app. Takes the brief as an argument or a request — `/corgy:demo "an onboarding demo for Acme"` in Claude Code, or just "plan an onboarding demo for Acme" — works out what the product is from the repo you are standing in, or from the web when the repo is not here, and comes back with a summary, a scene plan with the recording prompt under each scene, and a narration prompt. Then writes it all as a demo sheet and opens Corgy on it, where the takes are listed and each one is aimed into the video the first take made, for the user to record scene by scene. Use when the user wants a demo, an onboarding video, a release clip, a changelog GIF, or says "record a demo", "show this off", "/corgy:demo". Adapts the plan to their feedback — drop a scene, merge it into one cut, change the order — and rewrites the sheet. Never records anything itself: pressing Record stays with the person whose screen it is.
 ---
 
 # Demo Planner
@@ -57,7 +57,8 @@ guesses. You are the only one here who can read the router.
 
 ## 0. Read the argument
 
-The argument is the brief:
+The argument is the brief. In Claude Code it comes after the command; in other
+agents it is simply what the user asked for:
 
 ```
 /corgy:demo "an onboarding demo for this app"

@@ -29,12 +29,27 @@ The plugin connects the Corgy MCP server (`https://api.corgy.ai/api/mcp`),
 which is how Claude edits the video. The first time it is used, run `/mcp` and
 sign in to Corgy in the browser window that opens.
 
+### ChatGPT and Codex
+
+The same folder is an [Agent Plugins](https://developers.openai.com/plugins/build/plugins)
+package: `plugin.json`, `mcp.json` and `skills/` at its root. Install it as a
+local plugin in Codex desktop or ChatGPT, then sign in to Corgy when asked.
+
+- **Codex desktop** runs commands on your Mac, so both skills work in full,
+  recording included.
+- **ChatGPT** cannot run commands on your computer, so it cannot record. It
+  plans the demo, hands you the sheet to record in Corgy for Mac, and then
+  edits, narrates and publishes the video through the MCP server.
+
 ## Use
 
 ```
 /corgy:make "a 60-second onboarding demo for our dashboard"
 /corgy:demo "the export feature, 60 seconds, for the changelog"
 ```
+
+Outside Claude Code there are no slash commands: ask for it in words, like
+"make a 60-second onboarding demo for our dashboard".
 
 Inside the product's repo, Claude reads the code for the real URLs, labels and
 flows. Outside it, it researches the product's site and says so.
@@ -44,7 +59,7 @@ editor for you to review, and a public share page is made only on request.
 
 ## What it runs and sends
 
-The plugin has no hooks, scripts or local servers. Its skills tell Claude to:
+The plugin has no hooks, scripts or local servers, in either format. Its skills tell Claude to:
 
 - **Read your repository** to plan the demo, or the product's public website
   when you are not in its repository.
