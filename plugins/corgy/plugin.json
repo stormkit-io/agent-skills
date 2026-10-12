@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "corgy",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Plans and makes product demos from your codebase. The demo skill hands a scene plan to the Corgy macOS app to record; the make skill records it in a clean browser, edits and narrates it through the Corgy MCP server, and hands back a video to review.",
   "author": {
     "name": "Stormkit",

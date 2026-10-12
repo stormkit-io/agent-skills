@@ -25,11 +25,14 @@ You drive two things:
   (`get_timeline`, `cut`, ...) under a Corgy server. Use whichever is there. If
   none is, ask the user to connect Corgy and sign in (in Claude Code, `/mcp`).
 
-**Recording needs a shell on the user's Mac.** Opening the sheet, reading the
-report and the `curl` uploads are commands run on their machine. An agent that
-cannot run them - ChatGPT, or any chat that runs in the cloud - cannot record:
-say so in one line, plan the demo with the demo skill and hand over the sheet
-for the user to record in Corgy, then do steps 5 to 8 on the video it makes.
+**Recording without a shell.** Opening the sheet and reading the report are
+commands on the user's Mac. An agent that cannot run them - ChatGPT, Claude.ai,
+any chat that runs in the cloud - records through the MCP server instead, when
+it offers `start_recording_run`: the user's own Corgy for Mac picks the run up,
+asks them, and records it. `references/cloud.md` has how a cloud sheet differs
+and how to follow it. If that tool is not there either, say so in one line, plan
+the demo with the demo skill and hand over the sheet for the user to record in
+Corgy, then do steps 5 to 8 on the video it makes.
 
 You never call the Corgy API any other way — no `curl` to api.corgy.ai, ever.
 The only `curl` you run is against a signed link the MCP server hands you: the

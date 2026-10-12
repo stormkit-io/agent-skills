@@ -37,9 +37,12 @@ local plugin in Codex desktop or ChatGPT, then sign in to Corgy when asked.
 
 - **Codex desktop** runs commands on your Mac, so both skills work in full,
   recording included.
-- **ChatGPT** cannot run commands on your computer, so it cannot record. It
-  plans the demo, hands you the sheet to record in Corgy for Mac, and then
-  edits, narrates and publishes the video through the MCP server.
+- **ChatGPT** cannot run commands on your computer. With **Settings → Agents →
+  Accept recordings from assistants** on in Corgy for Mac, it records through
+  the MCP server instead: Corgy asks you before each recording and makes it in
+  a browser of its own. Without it, ChatGPT plans the demo and hands you the
+  sheet to record yourself. Either way it then edits, narrates and publishes the
+  video through the MCP server.
 
 ## Use
 
