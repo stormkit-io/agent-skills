@@ -198,6 +198,12 @@ them in full; the short version:
 A take with a `startURL` does **not** navigate to it in its prompt. The app
 tells the planner the page is already open; the prompt starts from there.
 
+**On Corgy 0.1.19 and newer, drive the product takes yourself.** Give each one
+`"driven": true` and a one-sentence `prompt` saying what it shows, and steer it
+step by step while it records, looking at the stage between steps.
+`references/driving.md` has the version check, the sheet field and the
+exchange. Title cards stay prompted.
+
 Write the sheet to `/tmp/<demo-name>.json`, never into the repo.
 
 ### Title cards and animations
@@ -255,7 +261,8 @@ open -a Corgy /tmp/<demo-name>.json
 ```
 
 Then follow `/tmp/<demo-name>.report.json` until its `state` is `done`,
-`failed` or `refused`. Poll it from a background shell with an `until` loop,
+`failed` or `refused`. When a driven take is `recording`, drive it through its
+folder as `references/driving.md` says, then go back to following the report. Poll it from a background shell with an `until` loop,
 not with repeated foreground calls — a take is tens of seconds and a demo is
 minutes. `references/autopilot.md` has the report's fields.
 
