@@ -226,7 +226,9 @@ is the only question this skill asks before the voiceover.
 
 **Whether the app may record.** Run
 `defaults read ai.corgy.recorder agentsMayRecord`. If it prints `1`, go on.
-Otherwise Corgy 0.1.14 and newer asks the person once, when the sheet opens:
+From Corgy 0.1.18 the switch is on unless the person turned it off, so a
+missing key there means go on too. Otherwise Corgy 0.1.14 and newer asks the
+person once, when the sheet opens:
 say "Corgy will ask you to allow agents to record; press Allow" and carry
 on. The report says `asking` until they answer; do not open the sheet again
 while it does, or the second sheet is refused. If the report then comes back `refused` because they declined, stop and
@@ -235,10 +237,16 @@ say so. An older Corgy refuses instead of asking: tell the user to turn on
 yourself - it is the person's consent, and writing it from a shell is
 exactly what it exists to stop.
 
-**Whether the stage is signed in.** If a take needs a login, the stage browser
-has its own profile and is signed out the first time. Ask the user once to use
-**Settings → Agents → Open the stage browser** and sign in, then carry on. The
-profile keeps it for every later run.
+**Whether the stage is signed in.** Decide from the plan whether any take
+starts behind a login: the repo puts its page behind auth middleware or a
+sign-in redirect, or `curl -sI <startURL>` answers with a `Location` to a
+sign-in page. If one does, ask in one message before opening the sheet -
+"Scenes 2 to 4 need you signed in to <site> in Corgy's stage browser. If you
+are not yet, open **Corgy → Settings → Agents → Open the stage browser**, sign
+in, and tell me when you're done." Then **wait for the answer**. A take
+recorded signed out only films the sign-in page. The stage keeps the sign-in
+for every later run, so a "yes, already" is enough. Never sign in from a take
+or put a password in a prompt.
 
 ## 4. Record
 
@@ -277,6 +285,11 @@ Opening a sheet again starts a **new** video. So to redo or finish takes:
 
 The usual failures, and what to change:
 
+- **a sign-in page where the product should be** — the stage is signed out of
+  that site. Do not re-record and do not try to sign in from a take: stop, ask
+  the user to sign in through **Settings → Agents → Open the stage browser**,
+  wait for their answer, then re-record only the takes still needed. It does
+  not count towards the two attempts.
 - **"Which website…" / the planner asked a question** — the prompt names no
   place. Give the take a `startURL`, or name the app in its first line.
 - **stuck: a step did nothing** — the label is wrong or the control is not on
@@ -301,7 +314,8 @@ Read the timeline and look:
 
 Reject and re-record a take that shows an error page, a spinner where the
 result should be, a login wall, a cookie banner over the subject, or anything
-private (a real customer's name, an email, a key). Say what you saw.
+private (a real customer's name, an email, a key). Say what you saw. A login
+wall is a sign-in for the user, not a re-record - see "Re-recording".
 
 ## 6. Assemble
 

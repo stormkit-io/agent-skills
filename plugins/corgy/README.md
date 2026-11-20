@@ -13,8 +13,9 @@ codebase.
 
 - **macOS** with [Corgy for Mac](https://www.corgy.ai/getting-started)
   installed and signed in. Recording happens in the app.
-- For `/corgy:make`, **Let agents record** turned on in the app's
-  Settings → Agents. Corgy asks the first time an agent starts a recording.
+- For `/corgy:make`, **Let agents record** on in the app's Settings → Agents.
+  It is on by default from Corgy 0.1.18; older versions ask the first time an
+  agent starts a recording.
 - A **Corgy account**. Writing a script and generating the voiceover use
   credits; Claude asks before spending them.
 
