@@ -237,10 +237,14 @@ say so. An older Corgy refuses instead of asking: tell the user to turn on
 yourself - it is the person's consent, and writing it from a shell is
 exactly what it exists to stop.
 
-**Whether the stage is signed in.** Decide from the plan whether any take
-starts behind a login: the repo puts its page behind auth middleware or a
-sign-in redirect, or `curl -sI <startURL>` answers with a `Location` to a
-sign-in page. If one does, ask in one message before opening the sheet -
+**Whether the stage is signed in.** Assume a take needs a sign-in whenever it
+goes past what a visitor can open - a dashboard, an editor, a project,
+settings, anything inside the product - and its prompt has no steps that sign
+in. Do not find out by recording: a take shot signed out films the sign-in
+page, and every step after it hunts for a control that is not there. Skip the
+question only when every take stays on public pages (a landing page, docs,
+pricing), or when the prompt itself signs in with a demo account the user gave
+you. Otherwise ask in one message before opening the sheet -
 "Scenes 2 to 4 need you signed in to <site> in Corgy's stage browser. If you
 are not yet, open **Corgy → Settings → Agents → Open the stage browser**, sign
 in, and tell me when you're done." Then **wait for the answer**. A take

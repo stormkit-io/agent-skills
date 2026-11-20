@@ -38,7 +38,8 @@ which scene is wrong:
 - `requested_by` is your own name (ChatGPT, Claude). The person is shown it.
 
 Signed-in demos: the same stage as local runs, so the same rule as step 3 of
-the skill - ask the user to sign in through **Settings → Agents → Open the stage
+the skill - any take inside the product, with no sign-in steps in its prompt,
+needs the user signed in first. Ask the user to sign in through **Settings → Agents → Open the stage
 browser** and wait for their answer before `start_recording_run`. A run that
 comes back on a sign-in page is a sign-in for the user, not a retry.
 
