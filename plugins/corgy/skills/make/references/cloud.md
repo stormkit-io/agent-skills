@@ -3,8 +3,7 @@
 For an agent with no shell on the user's Mac. `start_recording_run` sends the
 sheet to the server; Corgy for Mac, signed in to the same account with
 **Settings → Agents → Accept recordings from assistants** on, picks it up within
-seconds, asks the person at the Mac, and records it in a cloud stage browser of
-its own. Steps 1 to 3 of the skill are unchanged; this replaces step 4.
+seconds, asks the person at the Mac, and records it in Corgy's stage browser. Steps 1 to 3 of the skill are unchanged; this replaces step 4.
 
 ## The sheet
 
@@ -38,9 +37,10 @@ which scene is wrong:
   the person allows it, and every take comes out 16:9, the page alone.
 - `requested_by` is your own name (ChatGPT, Claude). The person is shown it.
 
-Signed-in demos: the cloud stage has its own profile. If a take needs a login,
-ask the user once to use **Settings → Agents → Open the cloud stage browser** and
-sign in there.
+Signed-in demos: the same stage as local runs, so the same rule as step 3 of
+the skill - ask the user to sign in through **Settings → Agents → Open the stage
+browser** and wait for their answer before `start_recording_run`. A run that
+comes back on a sign-in page is a sign-in for the user, not a retry.
 
 ## Following it
 
